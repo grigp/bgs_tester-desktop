@@ -2,10 +2,10 @@ INCLUDEPATH += $$PWD
 
 
 HEADERS += \
-    $$PWD/rs232dataprovider.h
+    $$PWD/rs232datacontroller.h
 
 SOURCES += \
-    $$PWD/rs232dataprovider.cpp
+    $$PWD/rs232datacontroller.cpp
 
 FORMS += \
 

@@ -17,11 +17,6 @@ public:
     ~BLEDataController() override;
 
 
-public slots:
-
-private slots:
-
-
 private:
     void run();
     void stop();

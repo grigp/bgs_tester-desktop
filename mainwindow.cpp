@@ -8,6 +8,10 @@
 #include <QStringList>
 #include <QDebug>
 
+#include "serialportdefines.h"
+#include "serialportutils.h"
+#include "serialdatacontroller.h"
+
 namespace
 {
 const QStringList Modulations = QStringList() << "без модуляции" << "3:1" << "5:1" << "1:1";
@@ -33,6 +37,11 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->cbFrequency->addItem(Frequencies.at(i));
     for (int i = 0; i < Intensivity.size(); ++i)
         ui->cbIntensivity->addItem(Intensivity.at(i));
+
+    for (int i = SerialPortDefines::pcCom1; i <= SerialPortDefines::pcCom127; ++i)
+    {
+        ui->cbPort->addItem(getSerialPortName(static_cast<SerialPortDefines::Ports>(i)), i);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -48,31 +57,31 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_connect()
 {
-    if (!m_dataController)
+    if (!m_bleDataController)
     {
-        m_dataController = new BLEDataController(this);
+        m_bleDataController = new BLEDataController(this);
         m_mdlDevices.clear();
-        connect(m_dataController, &BLEDataController::deviceFound, this, &MainWindow::on_deviceFound);
-        connect(m_dataController, &BLEDataController::dataReady, this, &MainWindow::on_dataReady);
-        connect(this, &MainWindow::setName, m_dataController, &BLEDataController::setName);
-        connect(this, &MainWindow::setBaud, m_dataController, &BLEDataController::setBaud);
-        connect(this, &MainWindow::setPIO, m_dataController, &BLEDataController::setPIO);
-        connect(this, &MainWindow::setValue, m_dataController, &BLEDataController::setValue);
-        connect(this, &MainWindow::setModulation, m_dataController, &BLEDataController::setModulation);
-        connect(this, &MainWindow::setFrequency, m_dataController, &BLEDataController::setFrequency);
-        connect(this, &MainWindow::setIntensivity, m_dataController, &BLEDataController::setIntensivity);
-        connect(this, &MainWindow::sendAnyCommand, m_dataController, &BLEDataController::sendAnyCommand);
+        connect(m_bleDataController, &BLEDataController::deviceFound, this, &MainWindow::on_deviceFound);
+        connect(m_bleDataController, &BLEDataController::dataReady, this, &MainWindow::on_dataReady);
+        connect(this, &MainWindow::setName, m_bleDataController, &BLEDataController::setName);
+        connect(this, &MainWindow::setBaud, m_bleDataController, &BLEDataController::setBaud);
+        connect(this, &MainWindow::setPIO, m_bleDataController, &BLEDataController::setPIO);
+        connect(this, &MainWindow::setValue, m_bleDataController, &BLEDataController::setValue);
+        connect(this, &MainWindow::setModulation, m_bleDataController, &BLEDataController::setModulation);
+        connect(this, &MainWindow::setFrequency, m_bleDataController, &BLEDataController::setFrequency);
+        connect(this, &MainWindow::setIntensivity, m_bleDataController, &BLEDataController::setIntensivity);
+        connect(this, &MainWindow::sendAnyCommand, m_bleDataController, &BLEDataController::sendAnyCommand);
 
-        connect(m_dataController, &BLEDataController::deviceConnected, this, &MainWindow::on_deviceConnected);
-        connect(m_dataController, &BLEDataController::deviceDisconnected, this, &MainWindow::on_deviceDisconnected);
+        connect(m_bleDataController, &BLEDataController::deviceConnected, this, &MainWindow::on_deviceConnected);
+        connect(m_bleDataController, &BLEDataController::deviceDisconnected, this, &MainWindow::on_deviceDisconnected);
 
-        emit m_dataController->getDevices();
+        emit m_bleDataController->getDevices();
         ui->btnConnect->setText(tr("Очистить список устройств"));
     }
     else
     {
-        delete m_dataController;
-        m_dataController = nullptr;
+        delete m_bleDataController;
+        m_bleDataController = nullptr;
         m_mdlDevices.clear();
         ui->btnConnect->setText(tr("Получить список устройств"));
     }
@@ -107,22 +116,38 @@ void MainWindow::on_selectDevice(QModelIndex index)
 
 void MainWindow::on_connectDevice()
 {
-    if (m_dataController)
+    if (m_bleDataController)
     {
         if (! m_isConnected)
         {
             if (m_deviceNum >= 0)
-                emit m_dataController->connectDevice(m_deviceNum);
+                emit m_bleDataController->connectDevice(m_deviceNum);
             else
                 QMessageBox::information(nullptr, "Предупреждение", "Сначала необходимо выбрать одно из устройств");
         }
         else
         {
-            emit m_dataController->disconnectDevice();
+            emit m_bleDataController->disconnectDevice();
         }
     }
     else
         QMessageBox::information(nullptr, "Предупреждение", "Сначала необходимо получить список устройств и выбрать одно из них");
+}
+
+void MainWindow::on_connectSerial()
+{
+    if (!m_serialDataController)
+    {
+        m_serialDataController = new SerialDataController(static_cast<SerialPortDefines::Ports>(ui->cbPort->currentData().toInt()), this);
+
+        ui->btnConnectSerial->setText(tr("Отключить"));
+    }
+    else
+    {
+        delete m_serialDataController;
+        m_serialDataController = nullptr;
+        ui->btnConnectSerial->setText(tr("Подключить"));
+    }
 }
 
 void MainWindow::on_setName()

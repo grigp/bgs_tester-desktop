@@ -1,7 +1,7 @@
 INCLUDEPATH += $$PWD
 
 include(ble/ble_src.pri)
-include(rs232/rs232_src.pri)
+include(serial/serial_src.pri)
 
 HEADERS += \
     $$PWD/datacontroller.h

@@ -12,6 +12,7 @@ class MainWindow;
 }
 
 class BLEDataController;
+class SerialDataController;
 
 class MainWindow : public QMainWindow
 {
@@ -19,7 +20,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     enum DevicesDataRoles
     {
@@ -35,6 +36,7 @@ signals:
     void setFrequency(const int idx);
     void setIntensivity(const int idx);
     void sendAnyCommand(const QByteArray &cmd);
+    void sendTextCommand(const QString &cmd);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -47,6 +49,9 @@ private slots:
     void on_selectDevice(QModelIndex index);
     void on_connectDevice();
 
+    void on_connectSerial();
+    void on_communicationError(const QString &drvName, const QString &port, const QString error);
+
     void on_setName();
     void on_setBaud();
     void on_setPIO();
@@ -56,6 +61,7 @@ private slots:
     void on_setFrequency();
     void on_setIntensivity();
     void on_sendAnyCommand();
+    void on_sendTextCommand();
 
     void on_deviceConnected();
     void on_deviceDisconnected();
@@ -63,7 +69,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    BLEDataController *m_dataController {nullptr};
+    BLEDataController *m_bleDataController {nullptr};
+    SerialDataController *m_serialDataController {nullptr};
+
     QStandardItemModel m_mdlDevices;
     int m_deviceNum {-1};
     bool m_isConnected {false};

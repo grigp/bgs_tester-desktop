@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>559</height>
+    <width>965</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,139 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="btnConnect">
-      <property name="text">
-       <string>Получить список устройств</string>
+     <widget class="QFrame" name="frDevices">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
       </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QGroupBox" name="gbBle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>Bluetooth Low Energy</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <widget class="QPushButton" name="btnConnect">
+            <property name="text">
+             <string>Получить список устройств</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="gbDevices">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Устройства</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <property name="leftMargin">
+              <number>1</number>
+             </property>
+             <property name="topMargin">
+              <number>1</number>
+             </property>
+             <property name="rightMargin">
+              <number>1</number>
+             </property>
+             <property name="bottomMargin">
+              <number>1</number>
+             </property>
+             <item>
+              <widget class="QListView" name="lvDevices">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <weight>75</weight>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnCreate">
+               <property name="text">
+                <string>Установить связь</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbSerialPort">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title">
+          <string>RS - 232</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QLabel" name="lblPort">
+            <property name="text">
+             <string>Порт</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cbPort"/>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnConnectSerial">
+            <property name="text">
+             <string>Подключить</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
@@ -37,72 +166,6 @@
        <property name="bottomMargin">
         <number>0</number>
        </property>
-       <item>
-        <widget class="QGroupBox" name="gbDevices">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="title">
-          <string>Устройства</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="leftMargin">
-           <number>1</number>
-          </property>
-          <property name="topMargin">
-           <number>1</number>
-          </property>
-          <property name="rightMargin">
-           <number>1</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
-          <item>
-           <widget class="QListView" name="lvDevices">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QFrame" name="frame">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnCreate">
-         <property name="text">
-          <string>Установить связь</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QGroupBox" name="gbData">
          <property name="title">
@@ -132,10 +195,14 @@
             <property name="font">
              <font>
               <pointsize>12</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
            </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="teDataStr"/>
           </item>
          </layout>
         </widget>
@@ -164,6 +231,7 @@
             <property name="font">
              <font>
               <pointsize>10</pointsize>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -224,6 +292,23 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblTextCommand">
+            <property name="text">
+             <string>Команда (ascii)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="edTextCommand"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnTextCommand">
+            <property name="text">
+             <string>Передать</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer">
@@ -321,6 +406,7 @@
                   </property>
                   <property name="font">
                    <font>
+                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -345,6 +431,7 @@
                   </property>
                   <property name="font">
                    <font>
+                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -641,6 +728,7 @@
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
+                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -685,7 +773,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>956</width>
+     <width>965</width>
      <height>21</height>
     </rect>
    </property>
@@ -710,8 +798,8 @@
    <slot>on_connect()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>155</x>
-     <y>55</y>
+     <x>213</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
      <x>519</x>
@@ -758,8 +846,8 @@
    <slot>on_valueUp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>83</x>
-     <y>521</y>
+     <x>81</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>628</x>
@@ -774,8 +862,8 @@
    <slot>on_valueDown()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>139</x>
-     <y>521</y>
+     <x>137</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>639</x>
@@ -790,8 +878,8 @@
    <slot>on_connectDevice()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>209</x>
-     <y>261</y>
+     <x>271</x>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
      <x>633</x>
@@ -806,8 +894,8 @@
    <slot>on_setName()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>256</x>
-     <y>418</y>
+     <x>287</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>847</x>
@@ -822,8 +910,8 @@
    <slot>on_setBaud()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>375</x>
-     <y>419</y>
+     <x>394</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>839</x>
@@ -838,8 +926,8 @@
    <slot>on_setPIO()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>472</x>
-     <y>424</y>
+     <x>475</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>839</x>
@@ -854,8 +942,8 @@
    <slot>on_setModulation()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>317</x>
-     <y>506</y>
+     <x>349</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -870,8 +958,8 @@
    <slot>on_setFrequency()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>504</x>
-     <y>513</y>
+     <x>560</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -886,8 +974,8 @@
    <slot>on_setIntensivity()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>745</x>
-     <y>508</y>
+     <x>771</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -902,12 +990,44 @@
    <slot>on_sendAnyCommand()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>866</x>
-     <y>507</y>
+     <x>927</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>950</x>
      <y>411</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnConnectSerial</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_connectSerial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>583</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>968</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTextCommand</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_sendTextCommand()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>781</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>962</x>
+     <y>515</y>
     </hint>
    </hints>
   </connection>
@@ -927,5 +1047,7 @@
   <slot>on_setFrequency()</slot>
   <slot>on_setIntensivity()</slot>
   <slot>on_sendAnyCommand()</slot>
+  <slot>on_connectSerial()</slot>
+  <slot>on_sendTextCommand()</slot>
  </slots>
 </ui>

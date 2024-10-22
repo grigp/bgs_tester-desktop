@@ -106,6 +106,7 @@ void MainWindow::on_dataReady(const QByteArray &data)
         s = s + "x" + QString::number(b, 16) + " ";
     }
     ui->teData->append(s);
+    ui->teDataStr->append(data);
 }
 
 void MainWindow::on_selectDevice(QModelIndex index)
@@ -139,15 +140,30 @@ void MainWindow::on_connectSerial()
     if (!m_serialDataController)
     {
         m_serialDataController = new SerialDataController(static_cast<SerialPortDefines::Ports>(ui->cbPort->currentData().toInt()), this);
+        connect(m_serialDataController, &SerialDataController::sendData, this, &MainWindow::on_dataReady);
+        connect(m_serialDataController, &SerialDataController::communicationError, this, &MainWindow::on_communicationError);
+        connect(this, &MainWindow::setName, m_serialDataController, &SerialDataController::setName);
+        connect(this, &MainWindow::setBaud, m_serialDataController, &SerialDataController::setBaud);
+        connect(this, &MainWindow::setPIO, m_bleDataController, &BLEDataController::setPIO);
+        connect(this, &MainWindow::sendTextCommand, m_serialDataController, &SerialDataController::sendTextCommand);
 
         ui->btnConnectSerial->setText(tr("Отключить"));
+        m_isConnected = true;
     }
     else
     {
+        disconnect(m_serialDataController, &SerialDataController::sendData, this, &MainWindow::on_dataReady);
+        disconnect(m_serialDataController, &SerialDataController::communicationError, this, &MainWindow::on_communicationError);
         delete m_serialDataController;
         m_serialDataController = nullptr;
         ui->btnConnectSerial->setText(tr("Подключить"));
+        m_isConnected = false;
     }
+}
+
+void MainWindow::on_communicationError(const QString &drvName, const QString &port, const QString error)
+{
+
 }
 
 void MainWindow::on_setName()
@@ -260,6 +276,21 @@ void MainWindow::on_sendAnyCommand()
         if (mr == QMessageBox::Yes)
         {
                 emit sendAnyCommand(cmd);
+        }
+    }
+    else
+        QMessageBox::information(nullptr, "Предупреждение", "Необходимо сначала установить связь с устройством");
+}
+
+void MainWindow::on_sendTextCommand()
+{
+    if (m_isConnected)
+    {
+        auto mr = QMessageBox::information(nullptr, "Предупреждение", "Передать команду (" + ui->edTextCommand->text() + ")?",
+                                           QMessageBox::Yes | QMessageBox::No);
+        if (mr == QMessageBox::Yes)
+        {
+                emit sendTextCommand(ui->edTextCommand->text());
         }
     }
     else

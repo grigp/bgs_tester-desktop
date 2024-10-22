@@ -37,6 +37,7 @@ signals:
     void setFrequency(const int idx);
     void setIntensivity(const int idx);
     void sendAnyCommand(const QByteArray &cmd);
+    void sendTextCommand(const QString &cmd);
 
     void deviceConnected();
     void deviceDisconnected();

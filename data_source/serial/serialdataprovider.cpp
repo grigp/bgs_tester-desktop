@@ -1,5 +1,9 @@
 #include "serialdataprovider.h"
 
+#include <QDebug>
+
+#include "datacontroller.h"
+
 SerialDataProvider::SerialDataProvider(QObject *parent) : QObject(parent)
 {
 
@@ -72,6 +76,27 @@ void SerialDataProvider::writeToPort(QByteArray data)
     {
         m_nativePort.write(data);
     }
+}
+
+void SerialDataProvider::on_setName(const QString name)
+{
+    writeToPort(DataController::setNameCommand(name));
+}
+
+void SerialDataProvider::on_setBaud()
+{
+    writeToPort(DataController::setBaudCommand());
+}
+
+void SerialDataProvider::on_setPIO()
+{
+    writeToPort(DataController::setPIOCommand());
+}
+
+void SerialDataProvider::on_sendTextCommand(const QString &cmd)
+{
+    qDebug() << Q_FUNC_INFO << cmd;
+    writeToPort(cmd.toUtf8());
 }
 
 void SerialDataProvider::handleError(QSerialPort::SerialPortError error)

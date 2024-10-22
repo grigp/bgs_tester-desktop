@@ -201,6 +201,9 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QTextEdit" name="teDataStr"/>
+          </item>
          </layout>
         </widget>
        </item>
@@ -289,6 +292,23 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblTextCommand">
+            <property name="text">
+             <string>Команда (ascii)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="edTextCommand"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnTextCommand">
+            <property name="text">
+             <string>Передать</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer">
@@ -778,8 +798,8 @@
    <slot>on_connect()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>184</x>
-     <y>101</y>
+     <x>213</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
      <x>519</x>
@@ -858,8 +878,8 @@
    <slot>on_connectDevice()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>240</x>
-     <y>259</y>
+     <x>271</x>
+     <y>251</y>
     </hint>
     <hint type="destinationlabel">
      <x>633</x>
@@ -995,6 +1015,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnTextCommand</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_sendTextCommand()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>781</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>962</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_connect()</slot>
@@ -1012,5 +1048,6 @@
   <slot>on_setIntensivity()</slot>
   <slot>on_sendAnyCommand()</slot>
   <slot>on_connectSerial()</slot>
+  <slot>on_sendTextCommand()</slot>
  </slots>
 </ui>

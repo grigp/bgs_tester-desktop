@@ -1,5 +1,7 @@
 #include "serialdatacontroller.h"
 
+#include <QDebug>
+
 #include "serialdataprovider.h"
 #include "serialportutils.h"
 
@@ -42,6 +44,10 @@ void SerialDataController::run()
     connect(this, &SerialDataController::disconnectPort, dpv, &SerialDataProvider::disconnectPort);
     connect(dpv, &SerialDataProvider::outPortData, this, &SerialDataController::on_readData);
     connect(this, &SerialDataController::writeData, dpv, &SerialDataProvider::writeToPort);
+    connect(this, &SerialDataController::setName, dpv, &SerialDataProvider::on_setName);
+    connect(this, &SerialDataController::setBaud, dpv, &SerialDataProvider::on_setBaud);
+    connect(this, &SerialDataController::setPIO, dpv, &SerialDataProvider::on_setPIO);
+    connect(this, &SerialDataController::sendTextCommand, dpv, &SerialDataProvider::on_sendTextCommand);
 
     emit setPortSettings(getSerialPortName(m_port),
                          QSerialPort::Baud115200,

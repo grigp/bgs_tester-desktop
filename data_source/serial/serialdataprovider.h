@@ -51,6 +51,11 @@ public slots:
      */
     void writeToPort(QByteArray data);
 
+    void on_setName(const QString name);
+    void on_setBaud();
+    void on_setPIO();
+    void on_sendTextCommand(const QString& cmd);
+
 private slots:
     /*!
      * \brief Слот обработки ошибок

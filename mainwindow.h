@@ -36,6 +36,7 @@ signals:
     void setFrequency(const int idx);
     void setIntensivity(const int idx);
     void sendAnyCommand(const QByteArray &cmd);
+    void sendTextCommand(const QString &cmd);
 
 protected:
     void closeEvent(QCloseEvent *event) override;
@@ -49,7 +50,7 @@ private slots:
     void on_connectDevice();
 
     void on_connectSerial();
-
+    void on_communicationError(const QString &drvName, const QString &port, const QString error);
 
     void on_setName();
     void on_setBaud();
@@ -60,6 +61,7 @@ private slots:
     void on_setFrequency();
     void on_setIntensivity();
     void on_sendAnyCommand();
+    void on_sendTextCommand();
 
     void on_deviceConnected();
     void on_deviceDisconnected();

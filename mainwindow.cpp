@@ -71,6 +71,7 @@ void MainWindow::on_connect()
         connect(this, &MainWindow::setFrequency, m_bleDataController, &BLEDataController::setFrequency);
         connect(this, &MainWindow::setIntensivity, m_bleDataController, &BLEDataController::setIntensivity);
         connect(this, &MainWindow::sendAnyCommand, m_bleDataController, &BLEDataController::sendAnyCommand);
+        connect(this, &MainWindow::sendTextCommand, m_bleDataController, &BLEDataController::sendTextCommand);
 
         connect(m_bleDataController, &BLEDataController::deviceConnected, this, &MainWindow::on_deviceConnected);
         connect(m_bleDataController, &BLEDataController::deviceDisconnected, this, &MainWindow::on_deviceDisconnected);
@@ -122,13 +123,17 @@ void MainWindow::on_connectDevice()
         if (! m_isConnected)
         {
             if (m_deviceNum >= 0)
+            {
                 emit m_bleDataController->connectDevice(m_deviceNum);
+                ui->gbSerialPort->setEnabled(false);
+            }
             else
                 QMessageBox::information(nullptr, "Предупреждение", "Сначала необходимо выбрать одно из устройств");
         }
         else
         {
             emit m_bleDataController->disconnectDevice();
+            ui->gbSerialPort->setEnabled(true);
         }
     }
     else
@@ -149,6 +154,7 @@ void MainWindow::on_connectSerial()
 
         ui->btnConnectSerial->setText(tr("Отключить"));
         m_isConnected = true;
+        ui->gbBle->setEnabled(false);
     }
     else
     {
@@ -158,6 +164,7 @@ void MainWindow::on_connectSerial()
         m_serialDataController = nullptr;
         ui->btnConnectSerial->setText(tr("Подключить"));
         m_isConnected = false;
+        ui->gbBle->setEnabled(true);
     }
 }
 

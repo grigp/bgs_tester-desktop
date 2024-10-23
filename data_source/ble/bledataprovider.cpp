@@ -149,6 +149,14 @@ void BLEDataProvider::on_sendAnyCommand(const QByteArray &cmd)
     }
 }
 
+void BLEDataProvider::on_sendTextCommand(const QString &cmd)
+{
+    if (m_service)
+    {
+        m_service->writeCharacteristic(m_info, cmd.toUtf8());
+    }
+}
+
 void BLEDataProvider::addDevice(const QBluetoothDeviceInfo &device)
 {
     // If device is LowEnergy-device, add it to the list

@@ -32,6 +32,7 @@ void BLEDataController::run()
     connect(this, &BLEDataController::setFrequency, ble_dpv, &BLEDataProvider::on_setFrequency);
     connect(this, &BLEDataController::setIntensivity, ble_dpv, &BLEDataProvider::on_setIntensivity);
     connect(this, &BLEDataController::sendAnyCommand, ble_dpv, &BLEDataProvider::on_sendAnyCommand);
+    connect(this, &BLEDataController::sendTextCommand, ble_dpv, &BLEDataProvider::on_sendTextCommand);
 
     connect(ble_dpv, &BLEDataProvider::deviceConnected, this, &BLEDataController::deviceConnected);
     connect(ble_dpv, &BLEDataProvider::deviceDisconnected, this, &BLEDataController::deviceDisconnected);

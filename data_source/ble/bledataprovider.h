@@ -36,6 +36,7 @@ public slots:
     void on_setFrequency(const int idx);
     void on_setIntensivity(const int idx);
     void on_sendAnyCommand(const QByteArray &cmd);
+    void on_sendTextCommand(const QString &cmd);
 
 private slots:
     void addDevice(const QBluetoothDeviceInfo &device);

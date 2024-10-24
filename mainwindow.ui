@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
-    <height>656</height>
+    <width>956</width>
+    <height>652</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -84,7 +84,6 @@
                <property name="font">
                 <font>
                  <pointsize>12</pointsize>
-                 <weight>75</weight>
                  <bold>true</bold>
                 </font>
                </property>
@@ -171,7 +170,7 @@
          <property name="title">
           <string>Данные</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
           <property name="leftMargin">
            <number>1</number>
           </property>
@@ -185,24 +184,94 @@
            <number>1</number>
           </property>
           <item>
-           <widget class="QTextEdit" name="teData">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
+           <widget class="QFrame" name="frData">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
             </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QTextEdit" name="teData">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTextEdit" name="teDataStr"/>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="teDataStr"/>
+           <widget class="QFrame" name="frDataCommand">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="btnClear">
+               <property name="text">
+                <string>Очистить</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -231,7 +300,6 @@
             <property name="font">
              <font>
               <pointsize>10</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -406,7 +474,6 @@
                   </property>
                   <property name="font">
                    <font>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -431,7 +498,6 @@
                   </property>
                   <property name="font">
                    <font>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -728,7 +794,6 @@
                   <property name="font">
                    <font>
                     <pointsize>10</pointsize>
-                    <weight>75</weight>
                     <bold>true</bold>
                    </font>
                   </property>
@@ -773,7 +838,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>965</width>
+     <width>956</width>
      <height>21</height>
     </rect>
    </property>
@@ -846,8 +911,8 @@
    <slot>on_valueUp()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>81</x>
-     <y>623</y>
+     <x>83</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>628</x>
@@ -862,8 +927,8 @@
    <slot>on_valueDown()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>137</x>
-     <y>623</y>
+     <x>139</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>639</x>
@@ -894,8 +959,8 @@
    <slot>on_setName()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>287</x>
-     <y>554</y>
+     <x>303</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>847</x>
@@ -910,8 +975,8 @@
    <slot>on_setBaud()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>394</x>
-     <y>554</y>
+     <x>415</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>839</x>
@@ -926,8 +991,8 @@
    <slot>on_setPIO()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>475</x>
-     <y>554</y>
+     <x>501</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>839</x>
@@ -942,8 +1007,8 @@
    <slot>on_setModulation()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>349</x>
-     <y>623</y>
+     <x>356</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -958,8 +1023,8 @@
    <slot>on_setFrequency()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>560</x>
-     <y>623</y>
+     <x>572</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -974,8 +1039,8 @@
    <slot>on_setIntensivity()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>771</x>
-     <y>623</y>
+     <x>788</x>
+     <y>615</y>
     </hint>
     <hint type="destinationlabel">
      <x>843</x>
@@ -990,8 +1055,8 @@
    <slot>on_sendAnyCommand()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>927</x>
-     <y>623</y>
+     <x>916</x>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
      <x>950</x>
@@ -1010,7 +1075,7 @@
      <y>253</y>
     </hint>
     <hint type="destinationlabel">
-     <x>968</x>
+     <x>955</x>
      <y>169</y>
     </hint>
    </hints>
@@ -1022,12 +1087,28 @@
    <slot>on_sendTextCommand()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>781</x>
-     <y>542</y>
+     <x>815</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
-     <x>962</x>
+     <x>955</x>
      <y>515</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClear</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_dataClear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>916</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>960</x>
+     <y>282</y>
     </hint>
    </hints>
   </connection>
@@ -1049,5 +1130,6 @@
   <slot>on_sendAnyCommand()</slot>
   <slot>on_connectSerial()</slot>
   <slot>on_sendTextCommand()</slot>
+  <slot>on_dataClear()</slot>
  </slots>
 </ui>

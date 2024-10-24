@@ -63,6 +63,8 @@ private slots:
     void on_sendAnyCommand();
     void on_sendTextCommand();
 
+    void on_dataClear();
+
     void on_deviceConnected();
     void on_deviceDisconnected();
 

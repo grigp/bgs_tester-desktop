@@ -125,7 +125,6 @@ void MainWindow::on_connectDevice()
             if (m_deviceNum >= 0)
             {
                 emit m_bleDataController->connectDevice(m_deviceNum);
-                ui->gbSerialPort->setEnabled(false);
             }
             else
                 QMessageBox::information(nullptr, "Предупреждение", "Сначала необходимо выбрать одно из устройств");
@@ -133,7 +132,6 @@ void MainWindow::on_connectDevice()
         else
         {
             emit m_bleDataController->disconnectDevice();
-            ui->gbSerialPort->setEnabled(true);
         }
     }
     else
@@ -304,12 +302,19 @@ void MainWindow::on_sendTextCommand()
         QMessageBox::information(nullptr, "Предупреждение", "Необходимо сначала установить связь с устройством");
 }
 
+void MainWindow::on_dataClear()
+{
+    ui->teData->clear();
+    ui->teDataStr->clear();
+}
+
 void MainWindow::on_deviceConnected()
 {
     m_isConnected = true;
     ui->btnConnect->setEnabled(false);
     ui->lvDevices->setEnabled(false);
     ui->btnCreate->setText("Прекратить связь");
+    ui->gbSerialPort->setEnabled(false);
 }
 
 void MainWindow::on_deviceDisconnected()
@@ -318,4 +323,5 @@ void MainWindow::on_deviceDisconnected()
     ui->btnConnect->setEnabled(true);
     ui->lvDevices->setEnabled(true);
     ui->btnCreate->setText("Установить связь");
+    ui->gbSerialPort->setEnabled(true);
 }

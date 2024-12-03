@@ -5,11 +5,13 @@
 #include "serialdataprovider.h"
 #include "serialportutils.h"
 
-SerialDataController::SerialDataController(SerialPortDefines::Ports port, QObject *parent)
+SerialDataController::SerialDataController(SerialPortDefines::Ports port,
+                                           DataDefines::BaudRate br,
+                                           QObject *parent)
     : DataController (parent)
     , m_port(port)
 {
-    run();
+    run(br);
 }
 
 SerialDataController::~SerialDataController()
@@ -27,7 +29,7 @@ void SerialDataController::on_error(const QString &err)
     emit communicationError("SerialPort", getSerialPortName(m_port), err);
 }
 
-void SerialDataController::run()
+void SerialDataController::run(DataDefines::BaudRate br)
 {
     SerialDataProvider *dpv = new SerialDataProvider;
     dpv->moveToThread(&m_thread);
@@ -49,8 +51,12 @@ void SerialDataController::run()
     connect(this, &SerialDataController::setPIO, dpv, &SerialDataProvider::on_setPIO);
     connect(this, &SerialDataController::sendTextCommand, dpv, &SerialDataProvider::on_sendTextCommand);
 
+    QSerialPort::BaudRate brs = QSerialPort::Baud9600;
+    if (br == DataDefines::br115200)
+        brs = QSerialPort::Baud115200;
+
     emit setPortSettings(getSerialPortName(m_port),
-                         QSerialPort::Baud115200,
+                         brs,
                          QSerialPort::Data8,
                          QSerialPort::NoParity,
                          QSerialPort::OneStop,

@@ -7,6 +7,8 @@
 #include <QStandardItemModel>
 #include <QCloseEvent>
 
+#include "datadefines.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -29,7 +31,7 @@ public:
 
 signals:
     void setName(const QString name);
-    void setBaud();
+    void setBaud(const DataDefines::BaudRate br);
     void setPIO();
     void setValue(const quint8 value);
     void setModulation(const int idx);
@@ -54,6 +56,7 @@ private slots:
 
     void on_setName();
     void on_setBaud();
+    void on_setBaudRS232(int value);
     void on_setPIO();
     void on_valueUp();
     void on_valueDown();

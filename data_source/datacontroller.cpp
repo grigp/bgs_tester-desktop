@@ -12,9 +12,9 @@ QByteArray DataController::setNameCommand(const QString name)
     return command;
 }
 
-QByteArray DataController::setBaudCommand()
+QByteArray DataController::setBaudCommand(const DataDefines::BaudRate br)
 {
-    return QByteArray("AT+BAUD4");
+    return QByteArray("AT+BAUD" + QString::number(static_cast<int>(br)).toUtf8());
 }
 
 QByteArray DataController::setPIOCommand()

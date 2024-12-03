@@ -97,7 +97,7 @@ void BLEDataProvider::on_setBaud()
 {
     if (m_service)
     {
-        m_service->writeCharacteristic(m_info, DataController::setBaudCommand());
+        m_service->writeCharacteristic(m_info, DataController::setBaudCommand(DataDefines::br115200));
     }
 }
 

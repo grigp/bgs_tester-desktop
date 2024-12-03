@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include "datadefines.h"
+
 /*!
  * \brief Суперкласс, осущетсвляющий потоковое управение данными The DataController class
  */
@@ -13,7 +15,7 @@ public:
     explicit DataController(QObject *parent = nullptr);
 
     static QByteArray setNameCommand(const QString name);
-    static QByteArray setBaudCommand();
+    static QByteArray setBaudCommand(const DataDefines::BaudRate br);
     static QByteArray setPIOCommand();
     static QByteArray setValueCommand(const quint8 value);
 
@@ -30,7 +32,7 @@ signals:
     void dataReady(const QByteArray& data);
 
     void setName(const QString name);
-    void setBaud();
+    void setBaud(const DataDefines::BaudRate br);
     void setPIO();
     void setValue(const quint8 value);
     void setModulation(const int idx);

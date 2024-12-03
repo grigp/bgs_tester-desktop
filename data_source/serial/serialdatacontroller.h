@@ -15,7 +15,9 @@ class SerialDataController : public DataController
 {
     Q_OBJECT
 public:
-    SerialDataController(SerialPortDefines::Ports port, QObject *parent = nullptr);
+    SerialDataController(SerialPortDefines::Ports port,
+                         DataDefines::BaudRate br,
+                         QObject *parent = nullptr);
     ~SerialDataController() override;
 
 signals:
@@ -38,7 +40,7 @@ private slots:
     virtual void on_error(const QString &err);
 
 private:
-    void run();
+    void run(DataDefines::BaudRate br);
     void stop();
 
     QThread m_thread;

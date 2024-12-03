@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QSerialPort>
 
+#include "datadefines.h"
+
 /*!
  * \brief Класс, выполняющий работы с последовательным портом The SerialDataProvider class
  */
@@ -52,7 +54,7 @@ public slots:
     void writeToPort(QByteArray data);
 
     void on_setName(const QString name);
-    void on_setBaud();
+    void on_setBaud(const DataDefines::BaudRate br);
     void on_setPIO();
     void on_sendTextCommand(const QString& cmd);
 

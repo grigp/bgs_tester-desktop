@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->cbFrequency->addItem(Frequencies.at(i));
     for (int i = 0; i < Intensivity.size(); ++i)
         ui->cbIntensivity->addItem(Intensivity.at(i));
+    ui->cbBaudRate->addItem("9600", 0);
+    ui->cbBaudRate->addItem("115200", 4);
 
     for (int i = SerialPortDefines::pcCom1; i <= SerialPortDefines::pcCom127; ++i)
     {
@@ -142,7 +144,12 @@ void MainWindow::on_connectSerial()
 {
     if (!m_serialDataController)
     {
-        m_serialDataController = new SerialDataController(static_cast<SerialPortDefines::Ports>(ui->cbPort->currentData().toInt()), this);
+        DataDefines::BaudRate br = DataDefines::br9600;
+        if (ui->cbBaudRate->currentIndex() == 1)
+            br = DataDefines::br115200;
+
+        m_serialDataController = new SerialDataController(static_cast<SerialPortDefines::Ports>(ui->cbPort->currentData().toInt()),
+                                                          br, this);
         connect(m_serialDataController, &SerialDataController::sendData, this, &MainWindow::on_dataReady);
         connect(m_serialDataController, &SerialDataController::communicationError, this, &MainWindow::on_communicationError);
         connect(this, &MainWindow::setName, m_serialDataController, &SerialDataController::setName);
@@ -188,12 +195,22 @@ void MainWindow::on_setName()
 
 void MainWindow::on_setBaud()
 {
+
     if (m_isConnected)
     {
-        emit setBaud();
+        emit sendTextCommand("AT+BAUD4");
+//`        emit setBaud(DataDefines::br115200);
     }
     else
         QMessageBox::information(nullptr, "Предупреждение", "Необходимо сначала установить связь с устройством");
+}
+
+void MainWindow::on_setBaudRS232(int value)
+{
+//    DataDefines::BaudRate br = DataDefines::br9600;
+//    if (value == 1)
+//        br = DataDefines::br115200;
+//   emit setBaud(br);
 }
 
 void MainWindow::on_setPIO()
@@ -291,12 +308,13 @@ void MainWindow::on_sendTextCommand()
 {
     if (m_isConnected)
     {
-        auto mr = QMessageBox::information(nullptr, "Предупреждение", "Передать команду (" + ui->edTextCommand->text() + ")?",
-                                           QMessageBox::Yes | QMessageBox::No);
-        if (mr == QMessageBox::Yes)
-        {
-                emit sendTextCommand(ui->edTextCommand->text());
-        }
+        emit sendTextCommand(ui->edTextCommand->text());
+//        auto mr = QMessageBox::information(nullptr, "Предупреждение", "Передать команду (" + ui->edTextCommand->text() + ")?",
+//                                           QMessageBox::Yes | QMessageBox::No);
+//        if (mr == QMessageBox::Yes)
+//        {
+//                emit sendTextCommand(ui->edTextCommand->text());
+//        }
     }
     else
         QMessageBox::information(nullptr, "Предупреждение", "Необходимо сначала установить связь с устройством");

@@ -83,9 +83,9 @@ void SerialDataProvider::on_setName(const QString name)
     writeToPort(DataController::setNameCommand(name));
 }
 
-void SerialDataProvider::on_setBaud()
+void SerialDataProvider::on_setBaud(const DataDefines::BaudRate br)
 {
-    writeToPort(DataController::setBaudCommand());
+    writeToPort(DataController::setBaudCommand(br));
 }
 
 void SerialDataProvider::on_setPIO()
